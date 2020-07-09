@@ -1,3 +1,5 @@
-class Institiution:
-    def __init__(self, Institiution):
-        print(Institiution, 'is some institution')
+class Institution:
+    def __init__(self, address, owner):
+        self.__address = address
+        self.__owner = owner
+
