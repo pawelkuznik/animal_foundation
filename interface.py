@@ -1,8 +1,11 @@
 # Import the necessary packages
-from cat import Cat, print_all_cats
-from dog import Dog, print_all_dogs
-from temporary_home import Temporary_home
-from foundation import Foundation
+from cat import Cat, print_all_cats, print_cat_info, if_anyone_cat_is_hungry, if_anyone_cat_need_go_to_vet
+from dog import Dog, print_all_dogs,print_dog_info, if_anyone_dog_is_hungry, if_anyone_dog_need_go_to_vet
+from temporary_home import TemporaryHome, print_temp_home
+from foundation import Foundation, check_foundation_info
+
+# create object of our foundaton (it should getting data from file/database)
+our_foundation = Foundation('wroclaw', 'Pawel Kuznik', 30000, 'NewHope')
 
 
 def enter_dog_data():
@@ -14,10 +17,7 @@ def enter_dog_data():
     is_hungry = input("Is hungry? yes/no ")
     is_need_a_vet = input("Is need a vet? yes/no ")
     dog = Dog(name, age, weight, gender, dog_breed, is_hungry, is_need_a_vet)
-    print("\nNew dog added:", "\nDog name:", dog.get_name(), "\nDog age:", dog.get_age(),
-          "\nDog gender:", dog.get_gender(), "\nDog weight:", dog.get_weight(),
-          "\nDog breed:", dog.get_dog_breed(), '\nIs hungry:?', dog.get_is_hungry(),
-          '\nIs need a vet? ', dog.get_is_need_a_vet(), sep=' ')
+    print_dog_info(dog)
 
 #TODO: It should be parametrize (enter_animal_data() to not duplicate code
 
@@ -31,10 +31,15 @@ def enter_cat_data():
     is_hungry = input("Is hungry? yes/no ")
     is_need_a_vet = input("Is need a vet? yes/no ")
     cat = Cat(name, age, weight, gender, dog_breed, is_hungry, is_need_a_vet)
-    print("\nNew Cat added:", "\nCat name:", cat.get_name(), "\nCat age:", cat.get_age(),
-          "\nCat gender:", cat.get_gender(), "\nCat weight:", cat.get_weight(),
-          "\nCat breed:", cat.get_dog_breed(), '\nIs hungry:?', cat.get_is_hungry(),
-          '\nIs need a vet? ', cat.get_is_need_a_vet(), sep=' ')
+    print_cat_info(cat)
+
+
+def enter_temp_home_data():
+    name = input('Temporary home  name is: ')
+    address = input('Address is: ')
+    actual_free_space_to_animal = input('Actual free space to animals: ')
+    temp_home = TemporaryHome(name, address, actual_free_space_to_animal)
+    print_temp_home(temp_home)
 
 
 ans = True
@@ -45,12 +50,12 @@ while ans:
     1.Check list of ours animals
     2.Add new dog
     3.Add new cat
-    3.Check actual info about our foundation
-    4.Make the necessary purchases for animals
-    5.Add a new temporary home for animals
-    6.Check is some animal needs eat
-    7.Check is some animal need go to vet
-    8.Exit/Quit
+    4.Check actual info about our foundation
+    5.Make the necessary purchases for animals
+    6.Add a new temporary home for animals (home where animals wait to adoption)
+    7.Check is some animal needs eat
+    8.Check is some animal need go to vet
+    9.Exit/Quit
     """)
     ans = input("What would you like to do? ")
     if ans == "1":
@@ -59,11 +64,25 @@ while ans:
     elif ans == "2":
         enter_dog_data()
         print("New dog added")
+        input()
     elif ans == "3":
         enter_cat_data()
         print("New_cat added")
+        input()
     elif ans == "4":
-        print("\n Goodbye")
+        check_foundation_info(our_foundation)
+    elif ans == "5":
+        print('tst')
+    elif ans == "6":
+        enter_temp_home_data()
+    elif ans == "7":
+        if_anyone_dog_is_hungry()
+        if_anyone_cat_is_hungry()
+    elif ans == "8":
+        if_anyone_dog_need_go_to_vet()
+        if_anyone_cat_need_go_to_vet()
+    elif ans == "9":
+        print("\n Goodbye have a nice day!")
         ans = None
     else:
         print("\n Not Valid Choice Try again")
